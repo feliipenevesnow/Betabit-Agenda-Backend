@@ -1,27 +1,46 @@
-FROM php:8.2-fpm-alpine AS base
+FROM php:8.2-fpm-alpine
+
 RUN apk add --no-cache \
     git \
     curl \
     unzip \
     sqlite \
+    sqlite-dev \
     libxml2-dev \
-    $PHPIZE_DEPS \
-    && docker-php-ext-install -j$(nproc) \
+    oniguruma-dev \
+    zlib-dev \
+    libzip-dev \
+    curl-dev \
+    autoconf \
+    build-base \
+    pkgconf \
+    re2c
+
+RUN docker-php-ext-install -j$(nproc) \
     pdo_sqlite \
     dom \
-    xml \
     mbstring \
-    tokenizer \
-    curl \
-    && rm -rf /var/cache/apk/*
+    curl
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
 WORKDIR /app
-FROM base AS final
+
 COPY . /app
+
 RUN chown -R www-data:www-data /app \
     && chmod -R 775 /app/storage \
     && chmod -R 775 /app/bootstrap/cache \
     && touch database/database.sqlite \
     && chmod 664 database/database.sqlite
-CMD ["php-fpm"] 
+
+RUN composer install --no-dev --prefer-dist --optimize-autoloader
+
+COPY docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+CMD ["php-fpm"]
+
 EXPOSE 8080
