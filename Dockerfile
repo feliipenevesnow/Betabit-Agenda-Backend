@@ -6,6 +6,9 @@ RUN apk add --no-cache \
     unzip \
     sqlite \
     libxml2-dev \
+    oniguruma-dev \
+    zlib-dev \
+    libzip-dev \
     autoconf \
     build-base \
     pkgconf \
