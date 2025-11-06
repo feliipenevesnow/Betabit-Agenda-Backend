@@ -19,9 +19,7 @@ RUN apk add --no-cache \
 RUN docker-php-ext-install -j$(nproc) \
     pdo_sqlite \
     dom \
-    xml \
     mbstring \
-    tokenizer \
     curl
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
