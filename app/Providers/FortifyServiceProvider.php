@@ -23,7 +23,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // Limpo. O mapeamento foi movido para AppServiceProvider.
+        
     }
 
     /**
@@ -36,7 +36,7 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
-        // O bloco RateLimiter está correto
+        
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
             return Limit::perMinute(5)->by($throttleKey);
