@@ -2,7 +2,7 @@
 
 return [
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie', 'login', 'logout', 'register', 'user/*', 'user/profile-information', 'user/password'], // Adicione rotas Fortify se necessário, embora 'paths' => ['*'] geralmente cubra tudo.
+    'paths' => ['*'], 
 
     'allowed_methods' => ['*'],
 
