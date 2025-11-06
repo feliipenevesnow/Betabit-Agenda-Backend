@@ -5,10 +5,12 @@ RUN apk add --no-cache \
     curl \
     unzip \
     sqlite \
+    sqlite-dev \
     libxml2-dev \
     oniguruma-dev \
     zlib-dev \
     libzip-dev \
+    curl-dev \
     autoconf \
     build-base \
     pkgconf \
