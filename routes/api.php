@@ -11,6 +11,8 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::apiResource('contacts', ContactController::class);
+    Route::post('contacts/{contact}/toggle-favorite', [ContactController::class, 'toggleFavorite']);
+    Route::post('contacts/update-order', [ContactController::class, 'updateSortOrder']);
 });
 
 Route::get('/ai-photo', function () {

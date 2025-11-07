@@ -10,17 +10,14 @@ class Contact extends Model
 {
     use HasFactory;
 
-    /**
-     * Os atributos que podem ser atribuídos em massa.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'user_id',
         'name',
         'email',
         'phone',
         'image_path',
+        'is_favorite',
+        'sort_order',
     ];
 
     public function user(): BelongsTo
